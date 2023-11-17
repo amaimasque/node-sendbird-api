@@ -3,15 +3,18 @@
 /**
  * Module dependencies.
  */
+require('dotenv').config();
 
 var app = require('../app');
 var debug = require('debug')('next-sendgrid-api:server');
 var http = require('http');
 const sequelize = require('../utils/server')
 const Channel = require('../models/Channel')
+const User = require('../models/User')
 
 if (sequelize) {
-  Channel.sync().catch((err) => console.log('Error creating Channels table', err))
+  Channel.sync({ force: false , alter: true }).catch((err) => console.log('Error creating Channels table', err))
+  User.sync({ force: false , alter: true }).catch((err) => console.log('Error creating User table', err))
 }
 /**
  * Get port from environment and store in Express.

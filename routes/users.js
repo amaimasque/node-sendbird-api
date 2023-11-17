@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
+const User = require('../models/User');
+const Users = require('../controllers/Users');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// TODO: Add validator middleware
+router.post('/', Users.CreateUser);
+
+router.get('/', Users.GetAllUsers);
+
+router.get('/:id', Users.GetUser);
+
+// TODO: Add validator middleware
+router.put('/:id', Users.UpdateUser);
+
+router.delete('/:id', Users.DeleteUser);
 
 module.exports = router;

@@ -1,6 +1,21 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize('postgres://postgres:P%40ssword123@localhost:5432/sendbird');
+const POSTGRESQL_USERNAME = process.env.POSTGRESQL_USERNAME ?? ''
+const POSTGRESQL_PASSWORD = process.env.POSTGRESQL_PASSWORD ?? ''
+const POSTGRESQL_DATABASE_NAME = process.env.POSTGRESQL_DATABASE_NAME ?? ''
+const POSTGRESQL_HOST_NAME = process.env.POSTGRESQL_HOST_NAME ?? ''
+
+const sequelize = new Sequelize(
+  POSTGRESQL_DATABASE_NAME,
+  POSTGRESQL_USERNAME,
+  POSTGRESQL_PASSWORD,
+  {
+    host: POSTGRESQL_HOST_NAME,
+    dialect: 'postgres',
+    force: false,
+    logging: (...msg) => console.log(msg)
+  }
+);
 
 sequelize.authenticate().then(() => {
   console.log('Connection has been established successfully.');

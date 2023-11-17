@@ -1,35 +1,32 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../utils/server');
 
-const Channel = sequelize.define('Channel', {
+const User = sequelize.define('User', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  channelUrl: {
+  userIdentifier: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true
   },
-  creatorId: {
+  userNickname: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
-  chatMateId: {
+  profilePhoto: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   isDeleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
-  },
-  numMessages: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
+  }
 }, {
   sequelize,
   timestamps: true,
 });
 
-module.exports = Channel;
+module.exports = User;
