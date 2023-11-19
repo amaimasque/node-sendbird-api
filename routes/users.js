@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../models/User');
 const Users = require('../controllers/Users');
+const authorization = require('../middlewares/authorization');
+
+router.use(authorization)
 
 // TODO: Add validator middleware
 router.post('/', Users.CreateUser);
